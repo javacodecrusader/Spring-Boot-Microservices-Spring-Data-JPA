@@ -2,9 +2,11 @@ package com.saurabh.restaurent.ws.service;
 
 import java.util.Optional;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.saurabh.restaurent.dto.RestaurentDto;
 import com.saurabh.restaurent.model.RestaurentItem;
 import com.saurabh.restaurent.ws.dao.I_RestaurentDao;
 import com.saurabh.restaurent.ws.entity.Restaurent;
@@ -35,16 +37,16 @@ public class RestaurentService {
 		return item;
 	}
 	
-	public RestaurentItem addToMenu(RestaurentItem restaurentItem ) {
+	public RestaurentDto addRestaurent(RestaurentDto restaurentDto ) {
 		
-		Restaurent restaurent = new Restaurent();
-		convertDomainObjToEntity(restaurentItem, restaurent);
+		ModelMapper mapper = new ModelMapper();
+		Restaurent restaurent = mapper.map(restaurentDto, Restaurent.class);
+		//convertDomainObjToEntity(restaurentItem, restaurent);
 		System.out.println("Saving entity .............");
 		restaurent = restaurentDao.save(restaurent);
-		
 		System.out.println("added item "+restaurent.toString());
-		
-		return convertEntityToDomainObj(restaurent, restaurentItem); 
+		RestaurentDto addedRestaurent = mapper.map(restaurent, RestaurentDto.class);
+		return addedRestaurent; 
 	}
 
 	private void convertDomainObjToEntity(RestaurentItem restaurentItem, Restaurent restaurent) {

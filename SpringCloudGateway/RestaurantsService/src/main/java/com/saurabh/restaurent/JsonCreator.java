@@ -28,9 +28,9 @@ public class JsonCreator {
 	}
 
 	private static RestaurentItem getRestaurentMenu(RestaurentItem items) {
-			items.setRestaurentName("Achyutam");
-			items.setRestaurenttinno(123);
-			items.setRestaurentLocation("Mathura");
+			items.setRestaurentName("The Clark");
+			items.setRestaurenttinno(124);
+			items.setRestaurentLocation("Noida");
 			return items;
 	}
 
